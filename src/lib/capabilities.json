@@ -1,0 +1,14 @@
+{
+    "browserName": "Chrome",
+    "browserVersion": "latest",
+    "LT:Options": {
+        "platform": "Windows 10",
+        "build": "puppeteer-build-1",
+        "name": "Puppeteer test",
+        "resolution": "1680x1050",
+        "user": "helloyork",
+        "headless": true,
+        "accessKey": "ZeLuyvLLdzRtCfMTnA0uYDhImCKgjtCGiwpNAn7EAe6Pa4OHtb",
+        "network": true
+    }
+}

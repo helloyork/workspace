@@ -1,53 +1,38 @@
 <script>
-	import Header from './Header.svelte';
-	import './styles.css';
+	//@ts-nocheck
+
+	export let data;
+
+	import { fade } from 'svelte/transition';
+	import { circOut } from 'svelte/easing';
+	import Noticebar from '$lib/svelte/noticebar.svelte';
+	import { onMount } from 'svelte';
+	import '../app.css';
+	import Header from '$lib/svelte/header.svelte';
+	import { islogin } from '$lib/store';
+
+	onMount(() => {
+		if (localStorage.getItem('username') !== null) {
+			islogin.set(!data.isSlug);
+		}else{
+			islogin.set(false);
+			if(!location.href.includes('/login'))location.href = "/login";
+		}
+	});
+
+	const navs = [{ name: '', target: '' }];
 </script>
 
-<div class="app">
-	<Header />
+{#if $islogin}
+	<div transition:fade={{ duration: 200, easing: circOut }}>
+		<Header />
+		<Noticebar />
+	</div>
+{/if}
+<slot />
 
-	<main>
-		<slot />
-	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
-</div>
+<footer class="text-gray-500 bg-white px-4 py-5 max-w-screen-xl mx-auto md:px-8">
+</footer>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
 </style>
